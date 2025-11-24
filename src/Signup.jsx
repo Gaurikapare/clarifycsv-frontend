@@ -3,41 +3,40 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
 
     try {
+      // Temporary fake signup success
+      console.log("Signup data sent:", { email, password });
+
       alert("Signup successful! Redirecting to login...");
       navigate("/login");
+
     } catch (error) {
-      alert("Signup failed, try again!");
+      console.error(error);
+      alert("Signup failed!");
     }
   };
 
   return (
-    <div style={{ padding: "40px", textAlign: "center" }}>
+    <div style={{ maxWidth: "400px", margin: "40px auto", textAlign: "center" }}>
       <h2>Create Account</h2>
 
-      <form 
-        onSubmit={handleSignup} 
-        style={{
-          width: "350px",
-          margin: "auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: "15px",
-        }}
+      <form
+        onSubmit={handleSignup}
+        style={{ display: "flex", flexDirection: "column", gap: "15px" }}
       >
         <input
           type="email"
           placeholder="Email"
           required
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={{ padding: "10px" }}
         />
@@ -46,17 +45,18 @@ function Signup() {
           type="password"
           placeholder="Password"
           required
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
           style={{ padding: "10px" }}
         />
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           style={{
             padding: "12px",
             background: "black",
             color: "white",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         >
           Sign Up
