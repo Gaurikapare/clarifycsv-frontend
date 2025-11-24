@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -8,20 +7,14 @@ function Signup() {
 
   const navigate = useNavigate();
 
-  const handleSignup = async (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
 
-    try {
-      // Temporary fake signup success
-      console.log("Signup data sent:", { email, password });
+    // Temporary success
+    console.log("Signup submitted:", { email, password });
 
-      alert("Signup successful! Redirecting to login...");
-      navigate("/login");
-
-    } catch (error) {
-      console.error(error);
-      alert("Signup failed!");
-    }
+    alert("Signup successful! Redirecting to login…");
+    navigate("/login");
   };
 
   return (
