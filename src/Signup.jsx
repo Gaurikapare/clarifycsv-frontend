@@ -1,31 +1,47 @@
 import React, { useState } from "react";
 
 const Signup = () => {
-  const [username, setUsername] = useState("");
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSignup = (e) => {
     e.preventDefault();
-    alert("Signup feature is coming soon!");
+    alert("Signup feature will be added later!");
   };
 
   return (
     <div style={card}>
       <h2 style={title}>Create Account</h2>
 
-      <form onSubmit={handleSignup} style={form}>
+      <form onSubmit={handleSignup} style={formStyle}>
         <input
+          name="name"
           type="text"
           placeholder="Full Name"
           style={input}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={handleChange}
         />
 
-        <input type="email" placeholder="Email" style={input} />
-        <input type="password" placeholder="Password" style={input} />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          style={input}
+          onChange={handleChange}
+        />
 
-        <button type="submit" style={btn}>
-          Signup
-        </button>
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          style={input}
+          onChange={handleChange}
+        />
+
+        <button type="submit" style={btn}>Signup</button>
       </form>
     </div>
   );
@@ -44,7 +60,7 @@ const title = {
   marginBottom: "20px",
 };
 
-const form = {
+const formStyle = {
   display: "flex",
   flexDirection: "column",
   gap: "15px",

@@ -1,36 +1,39 @@
 import React, { useState } from "react";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({ email: "", password: "" });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    alert("Login feature is coming soon!");
+    alert("Login feature will be added later!");
   };
 
   return (
     <div style={card}>
       <h2 style={title}>Login</h2>
 
-      <form onSubmit={handleLogin} style={form}>
+      <form onSubmit={handleLogin} style={formStyle}>
         <input
+          name="email"
           type="email"
           placeholder="Email"
           style={input}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleChange}
         />
 
         <input
+          name="password"
           type="password"
           placeholder="Password"
           style={input}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handleChange}
         />
 
-        <button type="submit" style={btn}>
-          Login
-        </button>
+        <button type="submit" style={btn}>Login</button>
       </form>
     </div>
   );
@@ -49,7 +52,7 @@ const title = {
   marginBottom: "20px",
 };
 
-const form = {
+const formStyle = {
   display: "flex",
   flexDirection: "column",
   gap: "15px",
