@@ -1,62 +1,68 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-function Signup() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const navigate = useNavigate();
+const Signup = () => {
+  const [username, setUsername] = useState("");
 
   const handleSignup = (e) => {
     e.preventDefault();
-
-    // Temporary success
-    console.log("Signup submitted:", { email, password });
-
-    alert("Signup successful! Redirecting to login…");
-    navigate("/login");
+    alert("Signup feature is coming soon!");
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "40px auto", textAlign: "center" }}>
-      <h2>Create Account</h2>
+    <div style={card}>
+      <h2 style={title}>Create Account</h2>
 
-      <form
-        onSubmit={handleSignup}
-        style={{ display: "flex", flexDirection: "column", gap: "15px" }}
-      >
+      <form onSubmit={handleSignup} style={form}>
         <input
-          type="email"
-          placeholder="Email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{ padding: "10px" }}
+          type="text"
+          placeholder="Full Name"
+          style={input}
+          onChange={(e) => setUsername(e.target.value)}
         />
 
-        <input
-          type="password"
-          placeholder="Password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{ padding: "10px" }}
-        />
+        <input type="email" placeholder="Email" style={input} />
+        <input type="password" placeholder="Password" style={input} />
 
-        <button
-          type="submit"
-          style={{
-            padding: "12px",
-            background: "black",
-            color: "white",
-            cursor: "pointer",
-          }}
-        >
-          Sign Up
+        <button type="submit" style={btn}>
+          Signup
         </button>
       </form>
     </div>
   );
-}
+};
+
+const card = {
+  background: "#ffffff",
+  padding: "25px",
+  borderRadius: "10px",
+  boxShadow: "0px 2px 8px rgba(0,0,0,0.12)",
+};
+
+const title = {
+  color: "#0f4c75",
+  textAlign: "center",
+  marginBottom: "20px",
+};
+
+const form = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "15px",
+};
+
+const input = {
+  padding: "12px",
+  border: "1px solid #ccc",
+  borderRadius: "8px",
+};
+
+const btn = {
+  padding: "12px",
+  background: "linear-gradient(90deg, #0f4c75, #3282b8)",
+  color: "white",
+  border: "none",
+  borderRadius: "8px",
+  cursor: "pointer",
+};
 
 export default Signup;

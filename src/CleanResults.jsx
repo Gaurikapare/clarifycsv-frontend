@@ -1,17 +1,15 @@
 import React from "react";
 
-const CleanResults = ({ result }) => {
+const CleanResults = ({ cleanedData }) => {
   return (
-    <div style={{ marginTop: "20px" }}>
-      <h3>Cleaned CSV Output</h3>
-      <pre
-        style={{
-          padding: "15px",
-          background: "#eee",
-          borderRadius: "6px",
-        }}
-      >
-        {JSON.stringify(result, null, 2)}
+    <div style={{ padding: "20px" }}>
+      <h2 style={{ color: "#0f4c75" }}>Cleaned CSV Output</h2>
+      <pre style={{
+        background: "#f5f5f5",
+        padding: "20px",
+        borderRadius: "8px"
+      }}>
+        {cleanedData || "No data yet"}
       </pre>
     </div>
   );

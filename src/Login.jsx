@@ -1,71 +1,73 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
 
-  const loginUser = () => {
-    if (email === "" || pass === "") {
-      alert("Please enter email & password!");
-      return;
-    }
-    navigate("/dashboard");
+  const handleLogin = (e) => {
+    e.preventDefault();
+    alert("Login feature is coming soon!");
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Login</h2>
+    <div style={card}>
+      <h2 style={title}>Login</h2>
 
-      <input
-        style={styles.input}
-        type="email"
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        style={styles.input}
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPass(e.target.value)}
-      />
+      <form onSubmit={handleLogin} style={form}>
+        <input
+          type="email"
+          placeholder="Email"
+          style={input}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <button style={styles.btn} onClick={loginUser}>
-        Login
-      </button>
+        <input
+          type="password"
+          placeholder="Password"
+          style={input}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-      <p>
-        Don't have an account? <a href="/signup">Signup</a>
-      </p>
+        <button type="submit" style={btn}>
+          Login
+        </button>
+      </form>
     </div>
   );
 };
 
-const styles = {
-  container: {
-    width: "350px",
-    margin: "60px auto",
-    padding: "30px",
-    borderRadius: "8px",
-    background: "#f3f3f3"
-  },
-  input: {
-    width: "100%",
-    padding: "10px",
-    marginBottom: "12px",
-    borderRadius: "5px",
-    border: "1px solid #bbb",
-  },
-  btn: {
-    width: "100%",
-    padding: "10px",
-    background: "#4CAF50",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  }
+const card = {
+  background: "#ffffff",
+  padding: "25px",
+  borderRadius: "10px",
+  boxShadow: "0px 2px 8px rgba(0,0,0,0.12)",
+};
+
+const title = {
+  color: "#0f4c75",
+  textAlign: "center",
+  marginBottom: "20px",
+};
+
+const form = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "15px",
+};
+
+const input = {
+  padding: "12px",
+  border: "1px solid #ccc",
+  borderRadius: "8px",
+};
+
+const btn = {
+  padding: "12px",
+  background: "linear-gradient(90deg, #0f4c75, #3282b8)",
+  color: "white",
+  border: "none",
+  borderRadius: "8px",
+  cursor: "pointer",
 };
 
 export default Login;
