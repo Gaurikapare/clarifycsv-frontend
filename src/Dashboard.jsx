@@ -1,36 +1,31 @@
-import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
-function Dashboard() {
-  const location = useLocation();
-  const result = location.state?.result;
 
-  useEffect(() => {
-    if (!result) {
-      window.location.href = "/upload";
-    }
-  }, [result]);
+import React from "react";
 
-  if (!result) return <div>Loading...</div>;
-
+const Dashboard = () => {
   return (
-    <div style={{ padding: 20 }}>
+    <div style={{ padding: "20px" }}>
       <h2>Dashboard</h2>
 
-      <h3>Summary</h3>
-      <p>Missing Values: {result.missing_values.length}</p>
-      <p>Duplicates: {result.duplicates.length}</p>
-      <p>Invalid Emails: {result.invalid_emails.length}</p>
-      <p>Invalid Phones: {result.invalid_phones.length}</p>
+      <p>Total Cleaned Files: 0</p>
+      <p>Last Upload: None</p>
+      <p>Status: Ready</p>
 
-      <h3>AI Cleaning Suggestions</h3>
-      <pre>{JSON.stringify(result.ai_suggestions, null, 2)}</pre>
-
-      <h3>Preview</h3>
-      <pre>{JSON.stringify(result.preview, null, 2)}</pre>
+      <a href="/upload" style={styles.btn}>
+        Upload New CSV
+      </a>
     </div>
   );
-}
+};
+
+const styles = {
+  btn: {
+    padding: "10px 20px",
+    background: "#4CAF50",
+    color: "white",
+    textDecoration: "none",
+    borderRadius: "5px",
+  },
+};
 
 export default Dashboard;
-

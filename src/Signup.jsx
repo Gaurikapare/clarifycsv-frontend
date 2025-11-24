@@ -1,46 +1,62 @@
 import React, { useState } from "react";
-import axios from "axios";
 
-function Signup() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [msg, setMsg] = useState("");
+const Signup = () => {
+  const [name, setName] = useState("");
 
-  const handleSignup = async () => {
-    try {
-      const res = await axios.post("http://127.0.0.1:8000/signup", {
-        username,
-        password,
-      });
-
-      setMsg(res.data.message);
-    } catch (err) {
-      setMsg(err.response?.data?.detail || "Signup failed");
-    }
+  const submitForm = () => {
+    alert("Signup successful!");
   };
 
   return (
-    <div style={{ padding: 40 }}>
-      <h2>Signup</h2>
+    <div style={styles.container}>
+      <h2>Create Account</h2>
 
       <input
+        style={styles.input}
         type="text"
-        placeholder="Username"
-        onChange={(e) => setUsername(e.target.value)}
-      /><br /><br />
+        placeholder="Full Name"
+        onChange={(e) => setName(e.target.value)}
+      />
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      /><br /><br />
+      <input style={styles.input} type="email" placeholder="Email" />
+      <input style={styles.input} type="password" placeholder="Password" />
 
-      <button onClick={handleSignup}>Signup</button>
+      <button style={styles.btn} onClick={submitForm}>
+        Signup
+      </button>
 
-      <p>{msg}</p>
+      <p>
+        Already have an account? <a href="/">Login</a>
+      </p>
     </div>
   );
-}
+};
+
+const styles = {
+  container: {
+    width: "350px",
+    margin: "60px auto",
+    padding: "30px",
+    borderRadius: "8px",
+    background: "#f3f3f3"
+  },
+  input: {
+    width: "100%",
+    padding: "10px",
+    marginBottom: "12px",
+    borderRadius: "5px",
+    border: "1px solid #bbb",
+  },
+  btn: {
+    width: "100%",
+    padding: "10px",
+    background: "#1e88e5",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  }
+};
 
 export default Signup;
 

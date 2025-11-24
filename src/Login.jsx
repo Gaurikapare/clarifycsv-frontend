@@ -1,46 +1,71 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [msg, setMsg] = useState("");
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    try {
-      const res = await axios.post("http://127.0.0.1:8000/login", {
-        username,
-        password,
-      });
-
-      setMsg(res.data.message);
-    } catch (err) {
-      setMsg(err.response?.data?.detail || "Login failed");
+  const loginUser = () => {
+    if (email === "" || pass === "") {
+      alert("Please enter email & password!");
+      return;
     }
+    navigate("/dashboard");
   };
 
   return (
-    <div style={{ padding: 40 }}>
+    <div style={styles.container}>
       <h2>Login</h2>
 
       <input
-        type="text"
-        placeholder="Username"
-        onChange={(e) => setUsername(e.target.value)}
-      /><br /><br />
-
+        style={styles.input}
+        type="email"
+        placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <input
+        style={styles.input}
         type="password"
         placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      /><br /><br />
+        onChange={(e) => setPass(e.target.value)}
+      />
 
-      <button onClick={handleLogin}>Login</button>
+      <button style={styles.btn} onClick={loginUser}>
+        Login
+      </button>
 
-      <p>{msg}</p>
+      <p>
+        Don't have an account? <a href="/signup">Signup</a>
+      </p>
     </div>
   );
-}
+};
+
+const styles = {
+  container: {
+    width: "350px",
+    margin: "60px auto",
+    padding: "30px",
+    borderRadius: "8px",
+    background: "#f3f3f3"
+  },
+  input: {
+    width: "100%",
+    padding: "10px",
+    marginBottom: "12px",
+    borderRadius: "5px",
+    border: "1px solid #bbb",
+  },
+  btn: {
+    width: "100%",
+    padding: "10px",
+    background: "#4CAF50",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  }
+};
 
 export default Login;
-
