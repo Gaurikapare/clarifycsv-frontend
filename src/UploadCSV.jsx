@@ -13,9 +13,8 @@ function UploadCSV() {
     formData.append("file", file);
 
     try {
-      // 🔥 Correct HF Backend URL
       const response = await fetch(
-        "https://gaurikapare-clarifycsv-cleaner-gauri.hf.space/clean_csv",
+        "https://gaurikapare-clarifycsv-cleaner-gauri.hf.space/predict",
         {
           method: "POST",
           body: formData,
@@ -38,7 +37,6 @@ function UploadCSV() {
       alert("CSV cleaned successfully!");
     } catch (error) {
       alert("Server error. Please try again.");
-      console.error(error);
     }
   };
 
