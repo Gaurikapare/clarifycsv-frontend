@@ -1,82 +1,60 @@
 import React, { useState } from "react";
-import axios from "axios";
 
-const UploadCSV = () => {
+function UploadCSV() {
   const [file, setFile] = useState(null);
-  const [cleanedData, setCleanedData] = useState(null);
 
   const uploadFile = async () => {
     if (!file) {
-      alert("Please select a CSV file");
+      alert("Please choose a CSV file first!");
       return;
     }
 
-    const formdata = new FormData();
-    formdata.append("file", file);
+    const formData = new FormData();
+    formData.append("file", file);
 
     try {
-      const res = await axios.post(
+      // 🔥 Correct HF Backend URL
+      const response = await fetch(
         "https://gaurikapare-clarifycsv-cleaner-gauri.hf.space/clean_csv",
-        formdata
+        {
+          method: "POST",
+          body: formData,
+        }
       );
 
-      setCleanedData(res.data.cleaned_csv);
+      if (!response.ok) {
+        alert("Error cleaning CSV. Please try again.");
+        return;
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "cleaned_data.csv";
+      a.click();
+
       alert("CSV cleaned successfully!");
-    } catch (err) {
-      alert("Error cleaning CSV. Please try again.");
+    } catch (error) {
+      alert("Server error. Please try again.");
+      console.error(error);
     }
   };
 
   return (
-    <div style={card}>
-      <h2 style={title}>Upload CSV to Clean</h2>
+    <div className="container">
+      <h2>Upload CSV to Clean</h2>
 
       <input
         type="file"
         accept=".csv"
-        style={{ marginBottom: "10px" }}
         onChange={(e) => setFile(e.target.files[0])}
       />
 
-      <button style={btn} onClick={uploadFile}>
-        Clean CSV
-      </button>
-
-      {cleanedData && (
-        <pre style={outputBox}>{cleanedData}</pre>
-      )}
+      <button onClick={uploadFile}>Clean CSV</button>
     </div>
   );
-};
-
-const card = {
-  background: "#fff",
-  padding: "25px",
-  borderRadius: "10px",
-  boxShadow: "0px 3px 8px rgba(0,0,0,0.1)",
-};
-
-const title = {
-  color: "#0f4c75",
-  marginBottom: "20px",
-  textAlign: "center",
-};
-
-const btn = {
-  padding: "12px",
-  background: "linear-gradient(90deg, #0f4c75, #3282b8)",
-  color: "white",
-  border: "none",
-  borderRadius: "8px",
-  cursor: "pointer",
-  marginBottom: "20px",
-};
-
-const outputBox = {
-  background: "#f7f7f7",
-  padding: "15px",
-  borderRadius: "8px",
-  whiteSpace: "pre-wrap",
-};
+}
 
 export default UploadCSV;
