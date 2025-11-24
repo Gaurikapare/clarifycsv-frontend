@@ -1,62 +1,69 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
-  const [name, setName] = useState("");
+function Signup() {
 
-  const submitForm = () => {
-    alert("Signup successful!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    try {
+      alert("Signup successful! Redirecting to login...");
+      navigate("/login");
+    } catch (error) {
+      alert("Signup failed, try again!");
+    }
   };
 
   return (
-    <div style={styles.container}>
+    <div style={{ padding: "40px", textAlign: "center" }}>
       <h2>Create Account</h2>
 
-      <input
-        style={styles.input}
-        type="text"
-        placeholder="Full Name"
-        onChange={(e) => setName(e.target.value)}
-      />
+      <form 
+        onSubmit={handleSignup} 
+        style={{
+          width: "350px",
+          margin: "auto",
+          display: "flex",
+          flexDirection: "column",
+          gap: "15px",
+        }}
+      >
+        <input
+          type="email"
+          placeholder="Email"
+          required
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ padding: "10px" }}
+        />
 
-      <input style={styles.input} type="email" placeholder="Email" />
-      <input style={styles.input} type="password" placeholder="Password" />
+        <input
+          type="password"
+          placeholder="Password"
+          required
+          onChange={(e) => setPassword(e.target.value)}
+          style={{ padding: "10px" }}
+        />
 
-      <button style={styles.btn} onClick={submitForm}>
-        Signup
-      </button>
-
-      <p>
-        Already have an account? <a href="/">Login</a>
-      </p>
+        <button 
+          type="submit" 
+          style={{
+            padding: "12px",
+            background: "black",
+            color: "white",
+            cursor: "pointer"
+          }}
+        >
+          Sign Up
+        </button>
+      </form>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    width: "350px",
-    margin: "60px auto",
-    padding: "30px",
-    borderRadius: "8px",
-    background: "#f3f3f3"
-  },
-  input: {
-    width: "100%",
-    padding: "10px",
-    marginBottom: "12px",
-    borderRadius: "5px",
-    border: "1px solid #bbb",
-  },
-  btn: {
-    width: "100%",
-    padding: "10px",
-    background: "#1e88e5",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  }
-};
+}
 
 export default Signup;
-
