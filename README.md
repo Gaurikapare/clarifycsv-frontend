@@ -1,70 +1,149 @@
-# Getting Started with Create React App
+# 📌 ClarifyCSV Cleaner
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A lightweight CSV cleaning web application built using React (frontend) and FastAPI (backend), deployed on Netlify + Hugging Face Spaces.
 
-## Available Scripts
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Upload any .csv file
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Remove duplicate rows
 
-### `npm test`
+Replace missing values
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Download cleaned CSV instantly
 
-### `npm run build`
+Simple & clean UI
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+FastAPI backend deployed on HuggingFace
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Fully automated pipeline (frontend + backend)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🧩 Tech Stack
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Frontend (React)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+React.js
 
-## Learn More
+Axios
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Netlify Deployment
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+Backend (FastAPI)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Python
 
-### Analyzing the Bundle Size
+Pandas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Uvicorn
 
-### Making a Progressive Web App
+Hugging Face Spaces (Docker)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🛠️ Architecture
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+React UI  --->  Netlify Hosting  
+        |
+        ↓
+CSV Upload + Request
+        |
+        ↓
+FastAPI Backend (HuggingFace)  
+        |
+        ↓
+Cleaning with Pandas  
+        |
+        ↓
+Cleaned CSV Download
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 🔧 How CSV Cleaning Works
+
+1. Remove duplicate rows
+
+
+2. Replace NaN / null with blank values
+
+
+3. Return cleaned CSV as downloadable file
+
+
+
+Backend uses:
+
+df = df.drop_duplicates()
+df = df.fillna("")
+
+
+---
+
+## 🌐 Live Links
+
+Frontend (Netlify)
+
+🔗 https://timely-scone-f7ff83.netlify.app
+
+Backend (Hugging Face Space)
+
+🔗 https://gaurikapare-clarifycsv-cleaner-gauri.hf.space
+
+
+---
+
+## 📝 API Endpoint
+
+POST /predict
+
+Upload CSV file → returns cleaned CSV file.
+
+Request
+
+file: CSV file
+
+Response
+
+Downloadable cleaned CSV
+
+
+
+---
+
+## 📦 Project Structure
+
+clarifycsv/
+│── backend/
+│   ├── main.py
+│   ├── cleaner.py
+│   ├── auth.py
+│   ├── requirements.txt
+│   └── Dockerfile
+│
+└── frontend/
+    ├── src/
+    │   ├── UploadCSV.jsx
+    │   ├── Signup.jsx
+    │   ├── Login.jsx
+    │   ├── Navbar.jsx
+    │   └── App.js
+    ├── package.json
+    └── public/
+
+
+---
+
+## 🏁 Conclusion
+
+ClarifyCSV Cleaner is a fast and easy CSV preprocessing tool for students, analysts, and developers.
+This project demonstrates full-stack development, API integration, and cloud deployment using Netlify & HuggingFace.
